@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe ActiveAdmin::ResourceController::DataAccess do
   before do
@@ -75,7 +76,7 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
         expect(controller.send(:active_admin_config)).to receive(:ordering).twice.and_return(
           {
             published_date: proc do |order_clause|
-              [order_clause.to_sql, 'NULLS LAST'].join(' ') if order_clause.order == 'desc'
+              [order_clause.to_sql, "NULLS LAST"].join(" ") if order_clause.order == "desc"
             end
           }.with_indifferent_access
         )
@@ -89,6 +90,7 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
           controller.send :apply_sorting, chain
         end
       end
+
       context "when params not applicable" do
         let(:http_params) { { order: "published_date_asc" } }
         it "reorders chain" do
@@ -201,7 +203,7 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
     let!(:category) { Category.create! }
 
     let(:params) do
-      ActionController::Parameters.new(user: { type: 'User::VIP', posts_attributes: [custom_category_id: category.id] })
+      ActionController::Parameters.new(user: { type: "User::VIP", posts_attributes: [custom_category_id: category.id] })
     end
 
     subject do
@@ -223,6 +225,17 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
     # see issue 4548
     it "should assign nested attributes once" do
       expect(subject.posts.size).to eq(1)
+    end
+
+    context "given authorization scope" do
+      let(:authorization) { controller.send(:active_admin_authorization) }
+
+      it "should apply authorization scope" do
+        expect(authorization).to receive(:scope_collection) do |collection|
+          collection.where(age: "42")
+        end
+        expect(subject.age).to eq(42)
+      end
     end
   end
 end

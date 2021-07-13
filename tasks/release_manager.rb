@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+require_relative "changelog"
+
 class ReleaseManager
   def initialize
     assert_compatible_ruby!
@@ -16,7 +19,7 @@ class ReleaseManager
 
     new_gem_prerelease = bump_gem_pre_version(:prerelease)
 
-    prepare_version(new_gem_prerelese)
+    prepare_version(new_gem_prerelease)
   end
 
   def prepare_prepatch
@@ -127,6 +130,8 @@ class ReleaseManager
   end
 
   def prepare_version(version)
+    create_release_branch(version)
+
     bump_gem(version)
     bump_npm(version)
 
@@ -145,6 +150,10 @@ class ReleaseManager
     system "npm", "version", npmify(version), "--no-git-tag-version", exception: true
   end
 
+  def create_release_branch(version)
+    system "git", "checkout", "-b", "release/#{version}", exception: true
+  end
+
   def bump_gem(version)
     bump_version_file(version)
     bump_lockfiles(version)
@@ -152,7 +161,7 @@ class ReleaseManager
 
   def bump_version_file(version)
     old_content = File.read(gem_version_file)
-    new_content = old_content.gsub!(/^  VERSION = '.*'$/, "  VERSION = '#{version}'")
+    new_content = old_content.gsub!(/^  VERSION = ".*"$/, "  VERSION = \"#{version}\"")
 
     File.open(gem_version_file, "w") { |f| f.puts new_content }
   end
@@ -175,11 +184,9 @@ class ReleaseManager
   end
 
   def cut_changelog(version)
-    old_content = File.read(changelog_file).split("\n")
-    new_entry = "## #{version} [☰](https://github.com/activeadmin/activeadmin/compare/v#{gem_version}..#{version})"
-    new_content = [*old_content[0..3], new_entry, "", old_content[4..-1]].join("\n")
+    header = "## #{version} [☰](https://github.com/activeadmin/activeadmin/compare/v#{gem_version}..v#{version})"
 
-    File.open(changelog_file, "w") { |f| f.puts(new_content) }
+    Changelog.new.cut_version(header)
   end
 
   def commit(version)
@@ -187,11 +194,11 @@ class ReleaseManager
   end
 
   def gem_version_file
-    'lib/active_admin/version.rb'
+    "lib/active_admin/version.rb"
   end
 
   def npm_version_file
-    'package.json'
+    "package.json"
   end
 
   def changelog_file
@@ -207,7 +214,7 @@ class ReleaseManager
   end
 
   def gem_version
-    @gem_version ||= File.read(gem_version_file).match(/^  VERSION = '(.*)'$/)[1]
+    @gem_version ||= File.read(gem_version_file).match(/^  VERSION = "(.*)"$/)[1]
   end
 
   def prerelease?(version)

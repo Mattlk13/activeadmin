@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe ActiveAdmin::Filters::ResourceExtension do
   let(:resource) do
@@ -47,7 +48,7 @@ RSpec.describe ActiveAdmin::Filters::ResourceExtension do
 
     it "should work as a string" do
       expect(resource.filters.keys).to include :author
-      resource.remove_filter 'author'
+      resource.remove_filter "author"
       expect(resource.filters.keys).to_not include :author
     end
 
@@ -82,7 +83,7 @@ RSpec.describe ActiveAdmin::Filters::ResourceExtension do
     end
 
     it "should work as a string" do
-      resource.add_filter 'title'
+      resource.add_filter "title"
       expect(resource.filters).to eq title: {}
     end
 

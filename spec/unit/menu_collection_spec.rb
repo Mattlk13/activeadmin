@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe ActiveAdmin::MenuCollection do
   let(:menus) { ActiveAdmin::MenuCollection.new }
@@ -25,9 +26,9 @@ RSpec.describe ActiveAdmin::MenuCollection do
 
       menus.clear!
 
-      expect {
+      expect do
         menus.fetch(:non_default_menu)
-      }.to raise_error(ActiveAdmin::NoMenuError)
+      end.to raise_error(ActiveAdmin::NoMenuError)
     end
   end
 

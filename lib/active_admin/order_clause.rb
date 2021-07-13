@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   class OrderClause
     attr_reader :field, :order, :active_admin_config
@@ -20,7 +21,7 @@ module ActiveAdmin
     end
 
     def to_sql
-      [table_column, @op, ' ', @order].compact.join
+      [table_column, @op, " ", @order].compact.join
     end
 
     def table

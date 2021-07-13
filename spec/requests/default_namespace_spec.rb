@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe ActiveAdmin::Application, type: :request do
   let(:resource) { ActiveAdmin.register Category }

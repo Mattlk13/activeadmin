@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   class MenuItem
     include Menu::MenuNode
@@ -45,13 +46,13 @@ module ActiveAdmin
     #
     def initialize(options = {})
       super() # MenuNode
-      @label          = options[:label]
-      @dirty_id       = options[:id]           || options[:label]
-      @url            = options[:url]          || '#'
-      @priority       = options[:priority]     || 10
-      @html_options   = options[:html_options] || {}
-      @should_display = options[:if]           || proc { true }
-      @parent         = options[:parent]
+      @label = options[:label]
+      @dirty_id = options[:id] || options[:label]
+      @url = options[:url] || "#"
+      @priority = options[:priority] || 10
+      @html_options = options[:html_options] || {}
+      @should_display = options[:if] || proc { true }
+      @parent = options[:parent]
 
       yield(self) if block_given? # Builder style syntax
     end

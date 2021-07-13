@@ -1,12 +1,12 @@
-require 'active_admin/base_controller/authorization'
-require 'active_admin/base_controller/menu'
+# frozen_string_literal: true
+require "active_admin/base_controller/authorization"
+require "active_admin/base_controller/menu"
 
 module ActiveAdmin
   # BaseController for ActiveAdmin.
   # It implements ActiveAdmin controllers core features.
   class BaseController < ::InheritedResources::Base
     helper ::ActiveAdmin::ViewHelpers
-    helper_method :env
 
     layout :determine_active_admin_layout
 
@@ -69,11 +69,11 @@ module ActiveAdmin
     #   2.  If we're rendering a custom action, we'll use the active_admin layout so
     #       that users can render any template inside Active Admin.
     def determine_active_admin_layout
-      ACTIVE_ADMIN_ACTIONS.include?(params[:action].to_sym) ? false : 'active_admin'
+      ACTIVE_ADMIN_ACTIONS.include?(params[:action].to_sym) ? false : "active_admin"
     end
 
     def active_admin_root
-      controller, action = active_admin_namespace.root_to.split '#'
+      controller, action = active_admin_namespace.root_to.split "#"
       { controller: controller, action: action }
     end
 

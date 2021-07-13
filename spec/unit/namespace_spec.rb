@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe ActiveAdmin::Namespace do
   let(:application) { ActiveAdmin::Application.new }
@@ -36,7 +37,7 @@ RSpec.describe ActiveAdmin::Namespace do
         ActiveAdmin.application.namespaces.instance_variable_get(:@namespaces).delete(:root)
 
         # To force Admin::PostsController to not be there
-        Admin.send(:remove_const, 'PostsController')
+        Admin.send(:remove_const, "PostsController")
       end
 
       after do
@@ -78,9 +79,9 @@ RSpec.describe ActiveAdmin::Namespace do
     end
 
     it "should raise an exception if the menu doesn't exist" do
-      expect {
+      expect do
         namespace.fetch_menu(:not_a_menu_that_exists)
-      }.to raise_error(KeyError)
+      end.to raise_error(KeyError)
     end
   end
 

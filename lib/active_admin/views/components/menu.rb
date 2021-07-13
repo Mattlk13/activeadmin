@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   module Views
 
@@ -25,7 +26,7 @@ module ActiveAdmin
       end
 
       def tag_name
-        'ul'
+        "ul"
       end
     end
   end

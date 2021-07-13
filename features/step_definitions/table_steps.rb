@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Then /^I should see (\d+) ([\w]*) in the table$/ do |count, resource_type|
   expect(page).to \
     have_css("table.index_table tr > td:first-child", count: count.to_i)
@@ -13,7 +14,7 @@ class HtmlTableToTextHelper
   def to_array
     rows = Nokogiri::HTML(@html).css("#{@selector} tr")
     rows.map do |row|
-      row.css('th, td').map do |td|
+      row.css("th, td").map do |td|
         cell_to_string(td)
       end
     end
@@ -23,13 +24,13 @@ class HtmlTableToTextHelper
 
   def cell_to_string(td)
     str = ""
-    input = td.css('input').last
+    input = td.css("input").last
 
     if input
-      str << input_to_string(input)
+      str += input_to_string(input)
     end
 
-    str << td.content.strip.gsub("\n", ' ')
+    str += td.content.strip.gsub("\n", " ")
   end
 
   def input_to_string(input)

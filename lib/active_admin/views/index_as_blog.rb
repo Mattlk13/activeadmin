@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   module Views
 
@@ -135,7 +136,7 @@ module ActiveAdmin
 
       def build_body(post)
         if @body
-          div class: 'content' do
+          div class: "content" do
             render_method_on_post_or_call_proc post, @body
           end
         end

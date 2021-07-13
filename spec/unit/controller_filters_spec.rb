@@ -1,10 +1,11 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe ActiveAdmin::Application do
   let(:application) { ActiveAdmin::Application.new }
   let(:controllers) { application.controllers_for_filters }
 
-  it 'controllers_for_filters' do
+  it "controllers_for_filters" do
     expect(application.controllers_for_filters).to eq [
       ActiveAdmin::BaseController, ActiveAdmin::Devise::SessionsController,
       ActiveAdmin::Devise::PasswordsController, ActiveAdmin::Devise::UnlocksController,

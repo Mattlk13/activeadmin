@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   module Views
 
@@ -68,7 +69,7 @@ module ActiveAdmin
       end
 
       def build_empty_cell
-        td '&nbsp;'.html_safe
+        td "&nbsp;".html_safe
       end
 
       def default_number_of_columns

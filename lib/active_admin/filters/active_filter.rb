@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   module Filters
 
@@ -39,8 +40,9 @@ module ActiveAdmin
       end
 
       def predicate_name
-        I18n.t("active_admin.filters.predicates.#{condition.predicate.name}",
-               default: ransack_predicate_name)
+        I18n.t(
+          "active_admin.filters.predicates.#{condition.predicate.name}",
+          default: ransack_predicate_name)
       end
 
       def html_options
@@ -66,7 +68,7 @@ module ActiveAdmin
       def filter_label
         return unless filter
 
-        filter[:label] || I18n.t(name, scope: ['formtastic', 'labels'], default: nil)
+        filter[:label] || I18n.t(name, scope: ["formtastic", "labels"], default: nil)
       end
 
       #@return Ransack::Nodes::Attribute
@@ -83,7 +85,7 @@ module ActiveAdmin
       end
 
       def find_class?
-        ['eq', 'in'].include? condition.predicate.arel_predicate
+        ["eq", "in"].include? condition.predicate.arel_predicate
       end
 
       # detect related class for Ransack::Nodes::Attribute
@@ -111,8 +113,6 @@ module ActiveAdmin
         @predicate_association = find_predicate_association unless defined?(@predicate_association)
         @predicate_association
       end
-
-      private
 
       def find_predicate_association
         condition_attribute.klass.reflect_on_all_associations.

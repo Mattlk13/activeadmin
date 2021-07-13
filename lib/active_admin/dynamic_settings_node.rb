@@ -1,5 +1,6 @@
-require 'active_admin/dynamic_setting'
-require 'active_admin/settings_node'
+# frozen_string_literal: true
+require "active_admin/dynamic_setting"
+require "active_admin/settings_node"
 
 module ActiveAdmin
 

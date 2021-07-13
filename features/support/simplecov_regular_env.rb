@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 if ENV["COVERAGE"] == "true"
-  require 'simplecov'
+  require "simplecov"
 
-  SimpleCov.command_name ["regular features", ENV['TEST_ENV_NUMBER']].join(" ").rstrip
+  SimpleCov.command_name ["regular features", ENV["TEST_ENV_NUMBER"]].join(" ").rstrip
 end
 
-require_relative 'env'
+require_relative "env"

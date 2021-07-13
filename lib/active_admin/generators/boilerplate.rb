@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   module Generators
     class Boilerplate
@@ -14,7 +15,7 @@ module ActiveAdmin
       end
 
       def permit_params
-        assignable_attributes.map { |a| a.to_sym.inspect }.join(', ')
+        assignable_attributes.map { |a| a.to_sym.inspect }.join(", ")
       end
 
       def rows

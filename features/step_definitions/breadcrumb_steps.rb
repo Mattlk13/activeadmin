@@ -1,4 +1,5 @@
-Around '@breadcrumb' do |scenario, block|
+# frozen_string_literal: true
+Around "@breadcrumb" do |scenario, block|
   previous_breadcrumb = ActiveAdmin.application.breadcrumb
 
   begin
@@ -9,5 +10,5 @@ Around '@breadcrumb' do |scenario, block|
 end
 
 Then /^I should see a link to "([^"]*)" in the breadcrumb$/ do |text|
-  expect(page).to have_css '.breadcrumb > a', text: text
+  expect(page).to have_css ".breadcrumb > a", text: text
 end

@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe "Routing", type: :routing do
   let(:namespaces) { ActiveAdmin.application.namespaces }
@@ -13,7 +14,7 @@ RSpec.describe "Routing", type: :routing do
     end
 
     it "should route to the admin dashboard" do
-      expect(get('/admin')).to route_to 'admin/dashboard#index'
+      expect(get("/admin")).to route_to "admin/dashboard#index"
     end
   end
 
@@ -36,7 +37,7 @@ RSpec.describe "Routing", type: :routing do
 
     context "with a custom path set in route_options" do
       before do
-        namespaces[:admin].route_options = { path: '/custom-path' }
+        namespaces[:admin].route_options = { path: "/custom-path" }
         reload_routes!
       end
 
@@ -109,7 +110,7 @@ RSpec.describe "Routing", type: :routing do
         end
 
         it "should default to GET" do
-          expect({ get: "/admin/posts/1/do_something" }).to      be_routable
+          expect({ get: "/admin/posts/1/do_something" }).to be_routable
           expect({ post: "/admin/posts/1/do_something" }).to_not be_routable
         end
       end
@@ -182,7 +183,7 @@ RSpec.describe "Routing", type: :routing do
 
       it "should properly route the collection action" do
         expect({ get: "/admin/users/do_something" }).to \
-          route_to({ controller: 'admin/users', action: 'do_something' })
+          route_to({ controller: "admin/users", action: "do_something" })
       end
     end
   end

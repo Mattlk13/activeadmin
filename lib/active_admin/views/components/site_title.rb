@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 module ActiveAdmin
   module Views
 
     class SiteTitle < Component
 
       def tag_name
-        'h1'
+        "h1"
       end
 
       def build(namespace)

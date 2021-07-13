@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   class ResourceController < BaseController
 
@@ -128,7 +129,7 @@ module ActiveAdmin
       #
       # @return [ActiveRecord::Base] An un-saved active record base object
       def build_new_resource
-        scoped_collection.send(
+        apply_authorization_scope(scoped_collection).send(
           method_for_build,
           *resource_params.map { |params| params.slice(active_admin_config.resource_class.inheritance_column) }
         )
@@ -258,7 +259,7 @@ module ActiveAdmin
       end
 
       def collection_applies(options = {})
-        only   = Array(options.fetch(:only, COLLECTION_APPLIES))
+        only = Array(options.fetch(:only, COLLECTION_APPLIES))
         except = Array(options.fetch(:except, []))
 
         COLLECTION_APPLIES & only - except

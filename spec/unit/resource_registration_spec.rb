@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe "Registering an object to administer" do
   let(:application) { ActiveAdmin::Application.new }

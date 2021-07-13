@@ -1,4 +1,5 @@
-Around '@head' do |scenario, block|
+# frozen_string_literal: true
+Around "@head" do |scenario, block|
   previous_head = ActiveAdmin.application.head
 
   begin

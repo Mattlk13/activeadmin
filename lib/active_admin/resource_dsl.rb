@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   # This is the class where all the register blocks are evaluated.
   class ResourceDSL < DSL
@@ -62,11 +63,12 @@ module ActiveAdmin
     #
     def permit_params(*args, &block)
       param_key = config.param_key.to_sym
-      belongs_to_param = config.belongs_to_param
-      create_another_param = :create_another if config.create_another
 
       controller do
         define_method :permitted_params do
+          belongs_to_param = active_admin_config.belongs_to_param
+          create_another_param = :create_another if active_admin_config.create_another
+
           permitted_params =
             active_admin_namespace.permitted_params +
               Array.wrap(belongs_to_param) +
@@ -183,16 +185,16 @@ module ActiveAdmin
     # == Before / After Destroy
     # Called before and after the object is destroyed from the database.
     #
-    delegate :before_build,   :after_build,   to: :controller
-    delegate :before_create,  :after_create,  to: :controller
-    delegate :before_update,  :after_update,  to: :controller
-    delegate :before_save,    :after_save,    to: :controller
+    delegate :before_build, :after_build, to: :controller
+    delegate :before_create, :after_create, to: :controller
+    delegate :before_update, :after_update, to: :controller
+    delegate :before_save, :after_save, to: :controller
     delegate :before_destroy, :after_destroy, to: :controller
 
     # This code defines both *_filter and *_action for Rails 5.0 and  *_action for Rails >= 5.1
     phases = [
       :before, :skip_before,
-      :after,  :skip_after,
+      :after, :skip_after,
       :around, :skip
     ]
     keywords = if Rails::VERSION::MAJOR == 5 && Rails::VERSION::MINOR >= 1

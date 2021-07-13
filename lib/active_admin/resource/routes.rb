@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveAdmin
   class Resource
     module Routes
@@ -41,8 +42,6 @@ module ActiveAdmin
 
         config[:route_collection_name] == config[:route_instance_name]
       end
-
-      private
 
       class RouteBuilder
         def initialize(resource)
@@ -98,13 +97,13 @@ module ActiveAdmin
           suffix = options[:suffix] || "path"
           route = []
 
-          route << options[:action]           # "batch_action", "edit" or "new"
-          route << resource.route_prefix      # "admin"
+          route << options[:action] # "batch_action", "edit" or "new"
+          route << resource.route_prefix # "admin"
           route << belongs_to_name if nested? # "category"
-          route << resource_path_name         # "posts" or "post"
-          route << suffix                     # "path" or "index path"
+          route << resource_path_name # "posts" or "post"
+          route << suffix # "path" or "index path"
 
-          route.compact.join('_').to_sym      # :admin_category_posts_path
+          route.compact.join("_").to_sym # :admin_category_posts_path
         end
 
         # @return params to pass to instance path

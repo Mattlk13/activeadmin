@@ -1,4 +1,5 @@
-require 'active_admin/helpers/optional_display'
+# frozen_string_literal: true
+require "active_admin/helpers/optional_display"
 
 module ActiveAdmin
 

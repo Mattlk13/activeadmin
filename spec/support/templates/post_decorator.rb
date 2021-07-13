@@ -1,4 +1,5 @@
-require 'draper'
+# frozen_string_literal: true
+require "draper"
 
 class PostDecorator < Draper::Decorator
   decorates :post
@@ -19,6 +20,6 @@ class PostDecorator < Draper::Decorator
   end
 
   def decorator_method
-    'A method only available on the decorator'
+    "A method only available on the decorator"
   end
 end
